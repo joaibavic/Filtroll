@@ -6,12 +6,23 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collections;
 
 @SpringBootApplication
 public class Filtroll {
 
     public static void main(String[] args) {
-        SpringApplication.run(Filtroll.class, args);
+        SpringApplication app = new SpringApplication(Filtroll.class);
+
+        String port = System.getenv("PORT"); // Utiliza el puerto asignado por Railway
+        if (port != null) {
+            app.setDefaultProperties(Collections.singletonMap("server.port", port));
+        }
+
+        app.run(args);
     }
 
     @Bean
@@ -22,4 +33,15 @@ public class Filtroll {
             System.out.println("Usuario insertado correctamente.");
         };
     }
+
+    // Endpoint de prueba para verificar que la app responde
+    @RestController
+    public class ControladorInicio {
+
+        @GetMapping("/health")
+        public String inicio() {
+            return "¡Filtroll está funcionando en Railway!";
+        }
+    }
+
 }
