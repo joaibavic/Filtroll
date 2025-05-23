@@ -2,9 +2,11 @@ com\tfc\modelo\Usuario.class
 com\tfc\servicios\ServicioFiltro.class
 com\tfc\modelo\HistorialImagen.class
 com\tfc\repositorio\HistorialRepositorio.class
+com\tfc\controladores\ControladorPing.class
 com\tfc\controladores\ControladorHistorial.class
 com\tfc\Filtroll.class
 com\tfc\controladores\ControladorFiltro.class
+com\tfc\Filtroll$ControladorInicio.class
 com\tfc\controladores\ControladorImagen.class
 com\tfc\repositorio\UsuarioRepositorio.class
 com\tfc\configuracion\WebConfig.class
