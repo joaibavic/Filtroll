@@ -1,0 +1,22 @@
+
+.filtros {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.boton-filtro {
+  padding: 10px 20px;
+  background-color: #ffffffaa;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.boton-filtro:hover {
+  background-color: #ffffff;
+}

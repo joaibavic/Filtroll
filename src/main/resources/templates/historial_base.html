@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Historial de filtros</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
+    }
+    header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+    header button {
+      background-color: #ffffff22;
+      color: #ffffff;
+      border: 1px solid #ffffff44;
+      padding: 10px 18px;
+      margin-left: 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    header button:hover {
+      background-color: #ffffff55;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .contenedor-imagenes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px;
+      gap: 20px;
+    }
+    .tarjeta {
+      background-color: rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      width: 200px;
+    }
+    .tarjeta img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .tarjeta p {
+      margin: 10px 0 5px;
+      font-size: 14px;
+    }
+    .tarjeta form button {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .tarjeta form button:hover {
+      background-color: #ff1a1a;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <form method="GET" action="/marco-general">
+    <button type="submit">Volver</button>
+  </form>
+  <form method="POST" action="/historial/borrar-todo">
+    <button type="submit">Borrar todo</button>
+  </form>
+</header>
+
+<h1>Historial de filtros aplicados</h1>
+
+<div class="contenedor-imagenes">
+  <!-- Aquí se repetirán dinámicamente las tarjetas de imágenes -->
+  <!-- Ejemplo:
+  <div class="tarjeta">
+    <img src="/imagenes/usuarios/1/filtros/ejemplo.jpg" alt="imagen filtrada">
+    <p>2025-05-19T20:12:20.638728</p>
+    <form method="POST" action="/historial/eliminar">
+      <input type="hidden" name="nombre" value="ejemplo.jpg">
+      <button type="submit">Eliminar</button>
+    </form>
+  </div>
+  -->
+</div>
+</body>
+</html>

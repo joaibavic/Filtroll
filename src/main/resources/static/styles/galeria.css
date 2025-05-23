@@ -1,0 +1,33 @@
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.item {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.item img {
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+.item b {
+  display: block;
+  margin-top: 10px;
+}
+
+small {
+  color: #666;
+  font-size: 0.85em;
+}

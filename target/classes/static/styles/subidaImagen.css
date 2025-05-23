@@ -1,0 +1,14 @@
+
+.form-subida {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+
+.form-subida input[type='file'] {
+  margin-bottom: 10px;
+}

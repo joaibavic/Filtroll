@@ -1,0 +1,89 @@
+/* Fondo general con degradado moderno */
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #ffffff;
+}
+
+/* Contenedor principal */
+.main-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  background-color: rgba(255, 255, 255, 0.07);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+/* Vista previa de imagen */
+img.imagen-previa {
+  width: 300px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  display: block;
+  margin: 0 auto;
+}
+
+/* Barra superior */
+.barra-superior {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Logo */
+.logo-filtroll {
+  height: 60px;
+  width: auto;
+}
+
+/* Zona de subida */
+.zona-subida form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Historial */
+.zona-historial button {
+  background-color: #ffffff22;
+  color: #ffffff;
+  border: 1px solid #ffffff44;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.zona-historial button:hover {
+  background-color: #ffffff55;
+}
+
+/* Filtros */
+.filtros {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.boton-filtro {
+  background-color: #ffffff22;
+  color: #ffffff;
+  border: 1px solid #ffffff44;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.boton-filtro:hover {
+  background-color: #ffffff55;
+}

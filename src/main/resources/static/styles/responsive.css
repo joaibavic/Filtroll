@@ -1,0 +1,25 @@
+
+@media (max-width: 768px) {
+  .galeria {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+
+  .filtros {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .boton-filtro {
+    width: 80%;
+    margin-bottom: 10px;
+  }
+
+  .form-subida {
+    width: 90%;
+    margin: auto;
+  }
+
+  .vista-previa img {
+    width: 90%;
+  }
+}

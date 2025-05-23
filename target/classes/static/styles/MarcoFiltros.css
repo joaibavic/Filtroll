@@ -1,0 +1,64 @@
+.marco-filtros-container {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px dashed #aaa;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.marco-filtros-container select {
+    padding: 5px;
+    font-size: 1rem;
+    margin-right: 10px;
+}
+
+.marco-filtros-container button {
+    padding: 5px 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+}
+
+.marco-filtros-container button:hover {
+    background-color: #218838;
+}
+
+.filtros-galeria {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.filtro-container {
+    display: inline-block;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    transition: border-color 0.3s;
+}
+
+.filtro-boton {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.filtro-img {
+    width: 100px;
+    border-radius: 6px;
+}
+
+body {
+    background-image: url('https://cdn.pixabay.com/photo/2020/04/19/08/17/watercolor-5062356_1280.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}

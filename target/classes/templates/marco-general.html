@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Filtroll - Aplicador de Filtros</title>
+  <link rel="stylesheet" href="/styles/estiloGeneral.css">
+  <link rel="stylesheet" href="/styles/vistaPrev.css">
+  <link rel="stylesheet" href="/styles/galeria.css">
+  <link rel="stylesheet" href="/styles/filtros.css">
+  <link rel="stylesheet" href="/styles/subidaImagen.css">
+  <link rel="stylesheet" href="/styles/responsive.css">
+  <style>
+    .logo-filtroll {
+      height: 60px;
+      width: auto;
+    }
+
+    .imagen-previa {
+      width: 25% !important;
+      height: auto;
+    }
+
+    .boton-imagen {
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .boton-imagen img {
+      width: 100px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 0 rgba(10, 30, 60, 0.15);
+      transition: transform 0.2s, box-shadow 0.2s;
+      background-color: transparent;
+    }
+
+    .boton-imagen img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 0 rgba(10, 30, 60, 0.4);
+    }
+
+    .predefinidas {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+      background-color: transparent;
+    }
+  </style>
+</head>
+<body>
+
+<header class="barra-superior">
+  <div class="zona-logo">
+    <img src="/imagenes/predefinidas/logoFiltroll.png" alt="Logo Filtroll" class="logo-filtroll">
+  </div>
+
+  <div class="zona-subida">
+    <form method="POST" action="/imagenes/subir" enctype="multipart/form-data">
+      <input type="file" name="imagen" accept="image/*" required>
+      <button type="submit">Subir imagen</button>
+    </form>
+  </div>
+
+  <div class="zona-historial">
+    <a href="/historial">
+      <button>Ver historial de filtros</button>
+    </a>
+  </div>
+</header>
+
+<div class="main-container">
+
+  <div class="predefinidas">
+    <form method="POST" action="/imagenes/seleccionar-predefinida">
+      <input type="hidden" name="imagen" value="20anios.png">
+      <button type="submit" class="boton-imagen">
+        <img src="/imagenes/predefinidas/20anios.png" alt="20 años">
+      </button>
+    </form>
+
+    <form method="POST" action="/imagenes/seleccionar-predefinida">
+      <input type="hidden" name="imagen" value="33anios.png">
+      <button type="submit" class="boton-imagen">
+        <img src="/imagenes/predefinidas/33anios.png" alt="33 años">
+      </button>
+    </form>
+
+    <form method="POST" action="/imagenes/seleccionar-predefinida">
+      <input type="hidden" name="imagen" value="50anios.png">
+      <button type="submit" class="boton-imagen">
+        <img src="/imagenes/predefinidas/50anios.png" alt="50 años">
+      </button>
+    </form>
+  </div>
+
+  <!-- Vista previa -->
+  <div class="vista-previa">
+    <h2>Vista previa</h2>
+    <img th:src="@{'/imagenes/resultados/ultima.jpg?v=' + ${version}}" alt="Imagen previa" class="imagen-previa" />
+  </div>
+
+  <!-- Filtros disponibles -->
+  <div class="filtros">
+    <form method="POST" action="/filtros/aplicar">
+      <input type="hidden" name="filtro" value="sepia">
+      <button class="boton-filtro">Sepia</button>
+    </form>
+
+    <form method="POST" action="/filtros/aplicar">
+      <input type="hidden" name="filtro" value="valencia">
+      <button class="boton-filtro">Valencia</button>
+    </form>
+
+    <form method="POST" action="/filtros/aplicar">
+      <input type="hidden" name="filtro" value="altoContraste">
+      <button class="boton-filtro">Alto Contraste</button>
+    </form>
+
+    <form method="POST" action="/filtros/aplicar">
+      <input type="hidden" name="filtro" value="colorPop">
+      <button class="boton-filtro">Color Pop</button>
+    </form>
+
+    <form method="POST" action="/filtros/aplicar">
+      <input type="hidden" name="filtro" value="invertir">
+      <button class="boton-filtro">Invertir Colores</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>
