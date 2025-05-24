@@ -1,14 +1,14 @@
-# Imagen base oficial de Java 20 (JDK)
-FROM eclipse-temurin:20-jdk
+# Imagen base con Java 17 (ligera)
+FROM openjdk:17-jdk-slim
 
 # Directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copia el JAR generado en tu máquina al contenedor
+# Copia el archivo .jar compilado al contenedor
 COPY target/filtroll-0.0.1-SNAPSHOT.jar app.jar
 
-# Expone el puerto que usa Spring Boot
+# Expone el puerto 8080 (Spring Boot)
 EXPOSE 8080
 
-# Comando que se ejecuta al iniciar el contenedor, con perfil `prod`
-CMD ["java", "-jar", "app.jar", "--spring.profiles.active=prod"]
+# Comando de inicio de la app
+ENTRYPOINT ["java", "-jar", "app.jar"]
