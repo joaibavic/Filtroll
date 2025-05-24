@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ControladorPing {
 
-    @GetMapping("/")
+    @GetMapping("/ping")
     public String ping() {
-        return "✔ Filtroll desplegada correctamente en Railway";
+        return "pong";
     }
+
 }
