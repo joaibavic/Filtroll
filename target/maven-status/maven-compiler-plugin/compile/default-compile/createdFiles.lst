@@ -4,6 +4,7 @@ com\tfc\modelo\HistorialImagen.class
 com\tfc\repositorio\HistorialRepositorio.class
 com\tfc\controladores\ControladorPing.class
 com\tfc\controladores\ControladorHistorial.class
+com\tfc\configuracion\ConfiguracionRecursos.class
 com\tfc\Filtroll.class
 com\tfc\controladores\ControladorFiltro.class
 com\tfc\Filtroll$ControladorInicio.class
