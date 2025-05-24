@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ui.Model;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -25,7 +26,7 @@ public class ControladorImagen {
     @PostMapping("/imagenes/subir")
     public String subirImagen(@RequestParam("imagen") MultipartFile archivo) {
         if (archivo.isEmpty()) {
-            return "redirect:/marco-general.html?error";
+            return "redirect:/marco-general?error";
         }
 
         Long idUsuario = 1L;
@@ -49,7 +50,7 @@ public class ControladorImagen {
 
         } catch (IOException e) {
             e.printStackTrace();
-            return "redirect:/marco-general.html?error=escritura";
+            return "redirect:/marco-general?error=escritura";
         }
 
         return "redirect:/marco-general";
@@ -57,18 +58,23 @@ public class ControladorImagen {
 
     @PostMapping("/imagenes/seleccionar-predefinida")
     public String seleccionarPredefinida(@RequestParam String imagen) {
-        try {
-            Path origen = Paths.get("imagenes/predefinidas/" + imagen);
+        try (InputStream in = getClass().getResourceAsStream("/static/imagenes/predefinidas/" + imagen)) {
+            if (in == null) {
+                System.out.println("❌ No se encontró la imagen predefinida en el classpath: " + imagen);
+                return "redirect:/marco-general?error=no-imagen";
+            }
+
             Path destino = Paths.get("imagenes/resultados/ultima.jpg");
             Path copiaOriginal = Paths.get("imagenes/resultados/original.jpg");
 
             Files.createDirectories(destino.getParent());
-            Files.copy(origen, destino, StandardCopyOption.REPLACE_EXISTING);
-            Files.copy(origen, copiaOriginal, StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(in, destino, StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(destino, copiaOriginal, StandardCopyOption.REPLACE_EXISTING);
 
-            System.out.println("✅ Imagen predefinida seleccionada: " + imagen);
+            System.out.println("✅ Imagen predefinida seleccionada desde classpath: " + imagen);
         } catch (IOException e) {
             e.printStackTrace();
+            return "redirect:/marco-general?error=lectura";
         }
         return "redirect:/marco-general";
     }
