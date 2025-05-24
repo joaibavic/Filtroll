@@ -29,13 +29,11 @@ public class ControladorImagen {
         }
 
         Long idUsuario = 1L;
-
         String nombreImagen = "foto_" + LocalDateTime.now()
                 .format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".jpg";
 
         Path rutaCarpetaUsuario = Paths.get("imagenes/usuarios/" + idUsuario);
         Path rutaFinalUsuario = rutaCarpetaUsuario.resolve(nombreImagen);
-
         Path rutaResultados = Paths.get("imagenes/resultados/ultima.jpg");
         Path rutaOriginal = Paths.get("imagenes/resultados/original.jpg");
 

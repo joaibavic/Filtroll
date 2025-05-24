@@ -17,8 +17,9 @@ import java.time.format.DateTimeFormatter;
 @Service
 public class ServicioFiltro {
 
-    private final String RUTA_ORIGINAL = "C:/filtroll/imagenes/resultados/original.jpg";
-    private final String RUTA_RESULTADO = "C:/filtroll/imagenes/resultados/ultima.jpg";
+    private final Path RUTA_ORIGINAL = Paths.get("imagenes/resultados/original.jpg");
+    private final Path RUTA_RESULTADO = Paths.get("imagenes/resultados/ultima.jpg");
+    private final Path RUTA_USUARIO_FILTROS = Paths.get("imagenes/usuarios/1/filtros");
 
     @Autowired
     private HistorialRepositorio historialRepositorio;
@@ -26,7 +27,7 @@ public class ServicioFiltro {
     public void aplicarFiltro(String filtro) {
         System.out.println("🛠 Aplicando filtro: " + filtro);
         try {
-            File archivo = new File(RUTA_ORIGINAL);
+            File archivo = RUTA_ORIGINAL.toFile();
             System.out.println("🔍 Leyendo original: " + archivo.getAbsolutePath());
 
             if (!archivo.exists()) {
@@ -47,29 +48,24 @@ public class ServicioFiltro {
             }
 
             // Guardar imagen temporal
-            Path tempPath = Paths.get("C:/filtroll/imagenes/resultados/temporal_" + filtro + ".jpg");
+            Path tempPath = Paths.get("imagenes/resultados/temporal_" + filtro + ".jpg");
             Files.createDirectories(tempPath.getParent());
-
             ImageIO.write(procesada, "jpg", tempPath.toFile());
             System.out.println("✅ Imagen temporal creada");
 
             // Reemplazar ultima.jpg
-            Path vistaPrevia = Paths.get(RUTA_RESULTADO);
-            if (Files.exists(vistaPrevia)) Files.delete(vistaPrevia);
-            Files.copy(tempPath, vistaPrevia, StandardCopyOption.REPLACE_EXISTING);
+            if (Files.exists(RUTA_RESULTADO)) Files.delete(RUTA_RESULTADO);
+            Files.copy(tempPath, RUTA_RESULTADO, StandardCopyOption.REPLACE_EXISTING);
             System.out.println("📥 Copiado a ultima.jpg");
 
             // Guardar en historial
             String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
             String nombreHistorial = "filtro_" + filtro + "_" + timestamp + ".jpg";
 
-            Path carpeta = Paths.get("C:/filtroll/imagenes/usuarios/1/filtros/");
-            Files.createDirectories(carpeta);
-
-            Path rutaFinal = carpeta.resolve(nombreHistorial);
+            Files.createDirectories(RUTA_USUARIO_FILTROS);
+            Path rutaFinal = RUTA_USUARIO_FILTROS.resolve(nombreHistorial);
             Files.copy(tempPath, rutaFinal, StandardCopyOption.REPLACE_EXISTING);
 
-            // Guardar en base de datos
             HistorialImagen registro = new HistorialImagen(
                     nombreHistorial,
                     filtro.toLowerCase(),
@@ -107,7 +103,6 @@ public class ServicioFiltro {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 Color color = new Color(imagen.getRGB(x, y));
-
                 int r = aplicarContraste(color.getRed(), contraste);
                 int g = aplicarContraste(color.getGreen(), contraste);
                 int b = aplicarContraste(color.getBlue(), contraste);
@@ -140,7 +135,6 @@ public class ServicioFiltro {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 Color color = new Color(imagen.getRGB(x, y));
-
                 int tr = (int) (0.393 * color.getRed() + 0.769 * color.getGreen() + 0.189 * color.getBlue());
                 int tg = (int) (0.349 * color.getRed() + 0.686 * color.getGreen() + 0.168 * color.getBlue());
                 int tb = (int) (0.272 * color.getRed() + 0.534 * color.getGreen() + 0.131 * color.getBlue());

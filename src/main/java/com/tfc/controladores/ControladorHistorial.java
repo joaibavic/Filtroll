@@ -16,7 +16,7 @@ public class ControladorHistorial {
     @Autowired
     private HistorialRepositorio historialRepositorio;
 
-    private final String RUTA_CARPETA = "C:/filtroll/imagenes/usuarios/1/filtros/";
+    private final Path RUTA_CARPETA = Paths.get("imagenes/usuarios/1/filtros/");
 
     @GetMapping("/historial")
     @ResponseBody
@@ -73,12 +73,11 @@ public class ControladorHistorial {
     @PostMapping("/historial/eliminar")
     public String eliminarImagen(@RequestParam Long id, @RequestParam String archivo) {
         historialRepositorio.deleteById(id);
-
-        File file = new File(RUTA_CARPETA + archivo);
-        if (file.exists()) {
-            file.delete();
+        try {
+            Files.deleteIfExists(RUTA_CARPETA.resolve(archivo));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
         return "redirect:/historial";
     }
 
@@ -87,9 +86,10 @@ public class ControladorHistorial {
         List<HistorialImagen> imagenes = historialRepositorio.findAll();
         for (HistorialImagen img : imagenes) {
             if (img.getUsuarioId().equals(1L)) {
-                File file = new File(RUTA_CARPETA + img.getNombreArchivo());
-                if (file.exists()) {
-                    file.delete();
+                try {
+                    Files.deleteIfExists(RUTA_CARPETA.resolve(img.getNombreArchivo()));
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
                 historialRepositorio.deleteById(img.getId());
             }
