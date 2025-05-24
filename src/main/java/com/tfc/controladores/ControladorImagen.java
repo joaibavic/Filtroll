@@ -16,8 +16,6 @@ import java.time.format.DateTimeFormatter;
 @Controller
 public class ControladorImagen {
 
-    private final Path carpetaBase = Paths.get("imagenes");
-
     @GetMapping("/marco-general")
     public String vistaPrincipal(Model model) {
         model.addAttribute("version", System.currentTimeMillis());
@@ -27,7 +25,7 @@ public class ControladorImagen {
     @PostMapping("/imagenes/subir")
     public String subirImagen(@RequestParam("imagen") MultipartFile archivo) {
         if (archivo.isEmpty()) {
-            return "redirect:/marco-general?error";
+            return "redirect:/marco-general.html?error";
         }
 
         Long idUsuario = 1L;
@@ -35,18 +33,17 @@ public class ControladorImagen {
         String nombreImagen = "foto_" + LocalDateTime.now()
                 .format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".jpg";
 
-        Path rutaCarpetaUsuario = carpetaBase.resolve("usuarios").resolve(String.valueOf(idUsuario));
+        Path rutaCarpetaUsuario = Paths.get("imagenes/usuarios/" + idUsuario);
         Path rutaFinalUsuario = rutaCarpetaUsuario.resolve(nombreImagen);
 
-        Path rutaResultados = carpetaBase.resolve("resultados").resolve("ultima.jpg");
-        Path rutaOriginal = carpetaBase.resolve("resultados").resolve("original.jpg");
+        Path rutaResultados = Paths.get("imagenes/resultados/ultima.jpg");
+        Path rutaOriginal = Paths.get("imagenes/resultados/original.jpg");
 
         try {
             Files.createDirectories(rutaCarpetaUsuario);
-            Files.createDirectories(rutaResultados.getParent());
-
             Files.write(rutaFinalUsuario, archivo.getBytes(), StandardOpenOption.CREATE);
 
+            Files.createDirectories(rutaResultados.getParent());
             Files.copy(rutaFinalUsuario, rutaResultados, StandardCopyOption.REPLACE_EXISTING);
             Files.copy(rutaFinalUsuario, rutaOriginal, StandardCopyOption.REPLACE_EXISTING);
 
@@ -54,7 +51,7 @@ public class ControladorImagen {
 
         } catch (IOException e) {
             e.printStackTrace();
-            return "redirect:/marco-general?error=escritura";
+            return "redirect:/marco-general.html?error=escritura";
         }
 
         return "redirect:/marco-general";
@@ -63,10 +60,11 @@ public class ControladorImagen {
     @PostMapping("/imagenes/seleccionar-predefinida")
     public String seleccionarPredefinida(@RequestParam String imagen) {
         try {
-            Path origen = carpetaBase.resolve("predefinidas").resolve(imagen);
-            Path destino = carpetaBase.resolve("resultados").resolve("ultima.jpg");
-            Path copiaOriginal = carpetaBase.resolve("resultados").resolve("original.jpg");
+            Path origen = Paths.get("imagenes/predefinidas/" + imagen);
+            Path destino = Paths.get("imagenes/resultados/ultima.jpg");
+            Path copiaOriginal = Paths.get("imagenes/resultados/original.jpg");
 
+            Files.createDirectories(destino.getParent());
             Files.copy(origen, destino, StandardCopyOption.REPLACE_EXISTING);
             Files.copy(origen, copiaOriginal, StandardCopyOption.REPLACE_EXISTING);
 
@@ -81,7 +79,7 @@ public class ControladorImagen {
     @ResponseBody
     public String galeria() {
         Long idUsuario = 1L;
-        Path carpetaFiltros = carpetaBase.resolve("usuarios").resolve(String.valueOf(idUsuario)).resolve("filtros");
+        Path carpetaFiltros = Paths.get("imagenes/usuarios/" + idUsuario + "/filtros");
 
         StringBuilder html = new StringBuilder();
         html.append("<html><head><title>Galería de Filtros</title></head><body>");
