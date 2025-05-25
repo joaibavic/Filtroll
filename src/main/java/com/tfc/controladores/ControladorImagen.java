@@ -1,10 +1,7 @@
 package com.tfc.controladores;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ui.Model;
 
@@ -71,7 +68,7 @@ public class ControladorImagen {
             Files.copy(in, destino, StandardCopyOption.REPLACE_EXISTING);
             Files.copy(destino, copiaOriginal, StandardCopyOption.REPLACE_EXISTING);
 
-            System.out.println("✅ Imagen predefinida seleccionada desde classpath: " + imagen);
+            System.out.println("✅ Imagen predefinida seleccionada desde classpath y guardada como original.jpg");
         } catch (IOException e) {
             e.printStackTrace();
             return "redirect:/marco-general?error=lectura";

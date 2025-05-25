@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Filtroll - Aplicador de Filtros</title>
-  <link rel="stylesheet" href="/styles/estiloGeneral.css">
-  <link rel="stylesheet" href="/styles/vistaPrev.css">
-  <link rel="stylesheet" href="/styles/galeria.css">
-  <link rel="stylesheet" href="/styles/filtros.css">
-  <link rel="stylesheet" href="/styles/subidaImagen.css">
-  <link rel="stylesheet" href="/styles/responsive.css">
+  <link rel="stylesheet" th:href="@{/styles/estiloGeneral.css}">
+  <link rel="stylesheet" th:href="@{/styles/vistaPrev.css}">
+  <link rel="stylesheet" th:href="@{/styles/galeria.css}">
+  <link rel="stylesheet" th:href="@{/styles/filtros.css}">
+  <link rel="stylesheet" th:href="@{/styles/subidaImagen.css}">
+  <link rel="stylesheet" th:href="@{/styles/responsive.css}">
   <style>
     .logo-filtroll {
       height: 60px;
@@ -56,7 +56,7 @@
 
 <header class="barra-superior">
   <div class="zona-logo">
-    <img src="/imagenes/predefinidas/logoFiltroll.png" alt="Logo Filtroll" class="logo-filtroll">
+    <img th:src="@{/imagenes/predefinidas/logoFiltroll.png}" alt="Logo Filtroll" class="logo-filtroll" />
   </div>
 
   <div class="zona-subida">
@@ -75,26 +75,25 @@
 
 <div class="main-container">
 
-  <!-- Imágenes predefinidas -->
   <div class="predefinidas">
     <form method="POST" action="/imagenes/seleccionar-predefinida">
       <input type="hidden" name="imagen" value="20anios.png">
       <button type="submit" class="boton-imagen">
-        <img src="/imagenes/predefinidas/20anios.png" alt="20 años">
+        <img th:src="@{/imagenes/predefinidas/20anios.png}" alt="20 años" />
       </button>
     </form>
 
     <form method="POST" action="/imagenes/seleccionar-predefinida">
       <input type="hidden" name="imagen" value="33anios.png">
       <button type="submit" class="boton-imagen">
-        <img src="/imagenes/predefinidas/33anios.png" alt="33 años">
+        <img th:src="@{/imagenes/predefinidas/33anios.png}" alt="33 años" />
       </button>
     </form>
 
     <form method="POST" action="/imagenes/seleccionar-predefinida">
       <input type="hidden" name="imagen" value="50anios.png">
       <button type="submit" class="boton-imagen">
-        <img src="/imagenes/predefinidas/50anios.png" alt="50 años">
+        <img th:src="@{/imagenes/predefinidas/50anios.png}" alt="50 años" />
       </button>
     </form>
   </div>
