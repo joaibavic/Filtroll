@@ -19,7 +19,7 @@ public class Filtroll {
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(Filtroll.class);
 
-        String port = System.getenv("PORT"); // Render lo gestiona igual que Railway
+        String port = System.getenv("PORT");
         if (port != null) {
             app.setDefaultProperties(Collections.singletonMap("server.port", port));
         }
@@ -27,29 +27,29 @@ public class Filtroll {
         app.run(args);
     }
 
-    // ✅ Al iniciar, insertar un usuario + preparar imagen original por defecto si no existe
     @Bean
     public CommandLineRunner demo(UsuarioRepositorio usuarioRepositorio) {
         return args -> {
-            // Insertar usuario demo
             Usuario usuario = new Usuario("Guillermo", "guille@filtroll.com");
             usuarioRepositorio.save(usuario);
             System.out.println("Usuario insertado correctamente.");
 
-            // Crear imagen original.jpg si no existe
             Path rutaOriginal = Paths.get("imagenes/resultados/original.jpg");
             Path rutaUltima = Paths.get("imagenes/resultados/ultima.jpg");
 
             if (!Files.exists(rutaOriginal)) {
                 Files.createDirectories(rutaOriginal.getParent());
 
-                try (InputStream in = Filtroll.class.getResourceAsStream("/static/imagenes/predefinidas/20anios.png")) {
+                String[] imagenes = { "20anios.png", "33anios.png", "50anios.png" };
+                String seleccionada = imagenes[(int) (Math.random() * imagenes.length)];
+
+                try (InputStream in = Filtroll.class.getResourceAsStream("/static/imagenes/predefinidas/" + seleccionada)) {
                     if (in != null) {
                         Files.copy(in, rutaOriginal, StandardCopyOption.REPLACE_EXISTING);
                         Files.copy(rutaOriginal, rutaUltima, StandardCopyOption.REPLACE_EXISTING);
-                        System.out.println("✅ Imagen original.jpg creada por defecto (20anios.png)");
+                        System.out.println("✅ Imagen por defecto seleccionada: " + seleccionada);
                     } else {
-                        System.out.println("⚠️ No se encontró 20anios.png en recursos.");
+                        System.out.println("⚠️ No se encontró en el classpath: " + seleccionada);
                     }
                 } catch (Exception e) {
                     System.out.println("❌ Error copiando imagen por defecto:");
@@ -61,7 +61,6 @@ public class Filtroll {
         };
     }
 
-    // Endpoint de prueba
     @RestController
     public class ControladorInicio {
         @GetMapping("/health")
