@@ -1,17 +1,18 @@
 FROM openjdk:17-jdk-slim
+
 WORKDIR /app
 
-# Añade variable de entorno activa
+# Activa el perfil de producción
 ENV SPRING_PROFILES_ACTIVE=prod
 
-# Copia el JAR compilado
+# Copia el JAR generado por Maven
 COPY target/filtroll-0.0.1-SNAPSHOT.jar app.jar
 
-# Copia los recursos estáticos para que estén disponibles en tiempo de ejecución
-COPY src/main/resources/static /app/static
+# Crea carpeta para imágenes generadas
+RUN mkdir -p imagenes/resultados
 
-# Exponer el puerto por el que Spring Boot servirá la app
+# Expone el puerto del servidor
 EXPOSE 8080
 
-# Inicia la aplicación Spring Boot
+# Ejecuta la app
 ENTRYPOINT ["java", "-jar", "app.jar"]

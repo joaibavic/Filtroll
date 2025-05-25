@@ -75,6 +75,7 @@
 
 <div class="main-container">
 
+  <!-- Imágenes predefinidas -->
   <div class="predefinidas">
     <form method="POST" action="/imagenes/seleccionar-predefinida">
       <input type="hidden" name="imagen" value="20anios.png">
@@ -101,7 +102,7 @@
   <!-- Vista previa -->
   <div class="vista-previa">
     <h2>Vista previa</h2>
-    <img th:src="@{'/imagenes/resultados/ultima.jpg?v=' + ${version}}" alt="Imagen previa" class="imagen-previa" />
+    <img th:src="@{/imagenes/resultados/ultima.jpg}" alt="Imagen previa" class="imagen-previa" />
   </div>
 
   <!-- Filtros disponibles -->
@@ -131,6 +132,7 @@
       <button class="boton-filtro">Invertir Colores</button>
     </form>
   </div>
+
 </div>
 </body>
 </html>

@@ -9,7 +9,6 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -57,6 +56,9 @@ public class ServicioFiltro {
             if (Files.exists(RUTA_RESULTADO)) Files.delete(RUTA_RESULTADO);
             Files.copy(tempPath, RUTA_RESULTADO, StandardCopyOption.REPLACE_EXISTING);
             System.out.println("📥 Copiado a ultima.jpg");
+
+            // NUEVO: Imprimir ruta absoluta
+            System.out.println("📍 Ruta absoluta de ultima.jpg: " + RUTA_RESULTADO.toFile().getAbsolutePath());
 
             // Guardar en historial
             String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
