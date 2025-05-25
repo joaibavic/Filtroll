@@ -14,6 +14,11 @@ public class ConfiguracionRecursos implements WebMvcConfigurer {
                 .addResourceLocations("file:imagenes/resultados/")
                 .setCachePeriod(0);
 
+        // Recursos de usuarios (historial)
+        registry.addResourceHandler("/imagenes/usuarios/**")
+                .addResourceLocations("file:imagenes/usuarios/")
+                .setCachePeriod(0);
+
         // Recursos predefinidos incluidos en el JAR
         registry.addResourceHandler("/imagenes/predefinidas/**")
                 .addResourceLocations("classpath:/static/imagenes/predefinidas/")
