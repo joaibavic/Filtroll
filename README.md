@@ -1,87 +1,46 @@
-# Filtroll 📷🌟
+# Filtroll – Image Processing Web Application
 
-Aplicador de filtros de imagen desarrollado en Java con Spring Boot. Permite subir imágenes, aplicar filtros visuales (como sepia, clarendon, alto contraste, etc.), guardar un historial de ediciones y visualizarlas en una galería.
+Filtroll is a web application built with Java and Spring Boot that allows users to upload images, apply visual filters, and manage a history of edited images.
 
----
+## Features
 
-## ✨ Características principales
-- Subida de imágenes personalizadas
-- Selección de imágenes de prueba
-- Aplicación de filtros visuales desde el backend puro
-- Vista previa actualizada sin uso de JavaScript
-- Historial de filtros aplicados
-- Opcion para eliminar una imagen o todo el historial
-- Interfaz visual moderna y responsive
+* Image upload system
+* Backend image processing (filters applied without JavaScript)
+* Multiple filters (Sepia, Clarendon, High Contrast, etc.)
+* Image history and gallery
+* Delete individual images or full history
+* Responsive UI
 
----
+## Technologies
 
-## 📊 Tecnologías usadas
-- Java 17
-- Spring Boot 3.2.x
-- Maven
-- Thymeleaf
-- Hibernate (JPA)
-- MySQL (local)
-- HTML + CSS personalizados (sin JS)
+* Java 17
+* Spring Boot
+* Spring MVC
+* Hibernate (JPA)
+* MySQL
+* Thymeleaf
+* HTML & CSS
 
----
+## What I Learned
 
-## 🚀 Despliegue en Railway
+* Backend image processing with Java (BufferedImage)
+* MVC architecture with Spring Boot
+* Database integration with Hibernate
+* File handling and storage
+* Full-stack development without frontend frameworks
 
-### 1. Subir el proyecto a GitHub
-```bash
-git init
-git add .
-git commit -m "Proyecto Filtroll listo para producción"
-git remote add origin https://github.com/TU_USUARIO/Filtroll
-git push -u origin master
-```
+## How to Run
 
-### 2. Crear proyecto en Railway
-- Entra en [https://railway.app](https://railway.app)
-- Selecciona **New Project > Deploy from GitHub**
-- Selecciona este repositorio
+1. Clone the repository
+2. Open in IntelliJ IDEA
+3. Run the Spring Boot application
+4. Open http://localhost:8080
 
-### 3. Configura puerto (si no está hecho):
-En `application.properties`, asegúrate de tener:
-```properties
-server.port=${PORT:8080}
-```
+## Project Context
 
-### 4. Configura comando de inicio:
-Railway ejecutará:
-```bash
-java -jar target/filtroll.jar
-```
-(Asegúrate de compilar el `.jar` antes o configura la build con Maven o Gradle en Railway)
+This project was developed as part of a Higher Degree in Multiplatform Application Development (DAM), focused on backend development and image processing.
 
-### 5. Despliegue listo
-Tu app estará disponible en algo como:
-```
-https://filtroll.up.railway.app
-```
+## Author
 
----
-
-## 📊 Estructura del proyecto
-```
-TFC_JIV/
-├── src/
-│   ├── main/java/com/tfc/controladores
-│   ├── main/resources/static/styles
-│   ├── main/resources/static/imagenes
-│   ├── main/resources/templates
-├── target/ (no se sube)
-├── pom.xml
-├── .gitignore
-├── README.md
-```
-
----
-
-## 📖 Licencia
-Este proyecto ha sido desarrollado como parte del Trabajo de Fin de Ciclo del autor en FP DAM. Uso libre con fines educativos y demostrativos.
-
----
-
-Desarrollado con ❤ por [@joaibavic](https://github.com/joaibavic)
+Developed by Joaquín Ibáñez
+GitHub: https://github.com/joaibavic
